@@ -3,7 +3,7 @@ package simulation;
 import simulation.entity.Entity;
 
 public class MapConsoleRenderer {
-    public void render(Map map){// метод для рендеринга карты, пустые ячейки обозначаем точками, а на занятые ствим существ
+    public void render(Map map){
         for (int rank = 8; rank >= 1; rank--) {
             String line = "";
             for(File file : File.values()){
@@ -19,16 +19,16 @@ public class MapConsoleRenderer {
         }
     }
 
-    private String setSpriteToEntity(String sprite){// метод для получения символа для обозначения существа на карте
+    private String setSpriteToEntity(String sprite){
         String result = sprite;
         return result;
     }
 
-    private String getSpringForEmptySquare(Coordinates coordinates){// метод для назначения символа пустой ячейки на карте, то есть точки
+    private String getSpringForEmptySquare(Coordinates coordinates){
         return " ·  ";
     }
 
-    private String selectSpriteForEntity(Entity entity){//метод для назначения символов unicode существ для прорисовки на карте
+    private String selectSpriteForEntity(Entity entity){
         switch (entity.getClass().getSimpleName()){
             case "Grass":
                 return "\uD83C\uDF3F";

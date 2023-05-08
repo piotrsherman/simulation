@@ -5,9 +5,9 @@ import simulation.entity.*;
 import java.util.HashMap;
 
 public class Map {
-    HashMap<Coordinates, Entity> entities = new HashMap<>();// коллекция расположения существ на карте, координаты и тип существа
+    HashMap<Coordinates, Entity> entities = new HashMap<>();
 
-    public void setEntity(Coordinates coordinates, Entity entity){// метод, который выставляет существо на карту
+    public void setEntity(Coordinates coordinates, Entity entity){
         entity.coordinates = coordinates;
         entities.put(coordinates, entity);
     }
@@ -20,9 +20,10 @@ public class Map {
         return entities.get(coordinates);
     }
 
-    public void setupDefaultEntitiesPositions(){// метод для расстановки существ на карте при старте симуляции
+    public void setupDefaultEntitiesPositions(){
         setEntity(new Coordinates(File.A, 1), new Predator(new Coordinates(File.A, 1)));
         setEntity(new Coordinates(File.B, 1), new Herbivore(new Coordinates(File.B, 1)));
         setEntity(new Coordinates(File.A, 2), new Tree(new Coordinates(File.A, 2)));
+        setEntity(new Coordinates(File.E, 5), new Grass(new Coordinates(File.E, 5)));
     }
 }
