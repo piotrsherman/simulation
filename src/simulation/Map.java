@@ -12,6 +12,17 @@ public class Map {
         entities.put(coordinates, entity);
     }
 
+    public void removeEntity(Coordinates coordinates){
+        entities.remove(coordinates);
+    }
+
+    public void moveEntity(Coordinates from, Coordinates to){
+        Entity entity = getEntity(from);
+
+        removeEntity(from);
+        setEntity(to, entity);
+    }
+
     public boolean isSquareEmpty(Coordinates coordinates){// проверка ячейки на карте, на факт того, что она свободна
         return !entities.containsKey(coordinates);
     }
