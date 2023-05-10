@@ -1,6 +1,6 @@
 package simulation.entity;
 
-public class CoordinatesShift {// класс, который описывает сдвиг горизонтали и вертикали
+public class CoordinatesShift {// класс, который описывает сдвиг по горизонтали и вертикали
     public final int fileShift;
     public final int rankShift;
 

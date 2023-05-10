@@ -16,6 +16,8 @@ public class Map {
         entities.remove(coordinates);
     }
 
+
+
     public void moveEntity(Coordinates from, Coordinates to){
         Entity entity = getEntity(from);
 
@@ -30,6 +32,7 @@ public class Map {
     public Entity getEntity(Coordinates coordinates){// метод для получения существа по заданным координатам
         return entities.get(coordinates);
     }
+
 
     public void setupDefaultEntitiesPositions(){
         setEntity(new Coordinates(File.A, 1), new Predator(new Coordinates(File.A, 1)));

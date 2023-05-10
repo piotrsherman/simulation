@@ -14,4 +14,7 @@ public class Creature extends Entity {
         super(coordinates);
     }
 
+    public void makeMove(){
+
+    }
 }
