@@ -1,12 +1,20 @@
 package simulation.entity;
 
-import simulation.Coordinates;
+import simulation.SimulationMap;
 
 public class Herbivore extends Creature {
-    //Травоядное существо - Стремится найти ресурс (траву)
-    // может потратить свой ход либо на движение в сторону травы, либо на её поглощение
+    public Herbivore(int x, int y) {
+        super(x, y);
+    }
 
-    public Herbivore(Coordinates coordinates) {
-        super(coordinates);
+    @Override
+    public String toString() {
+        return "\uD83D\uDC16"; // Травоядное - 🐖
+    }
+
+    @Override
+    public void makeMove(SimulationMap map) {
+        // Логика перемещения травоядного
+        System.out.println("Herbivore moving");
     }
 }

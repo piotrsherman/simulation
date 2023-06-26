@@ -1,11 +1,10 @@
 package simulation.entity;
 
-import simulation.Coordinates;
+import simulation.entity.Entity;
 
 public class Tree extends Entity {
-    //дерево - статичный объект
-
-    public Tree(Coordinates coordinates) {
-        super(coordinates);
+    @Override
+    public String toString() {
+        return "\uD83C\uDF33"; // Дерево - 🌳
     }
 }

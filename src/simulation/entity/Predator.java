@@ -1,12 +1,20 @@
 package simulation.entity;
 
-import simulation.Coordinates;
+import simulation.SimulationMap;
 
 public class Predator extends Creature {
-    // хищник - в дополнение к полям класса simulation.entity.Creature имеет силу атаки
-    // может потратить ход на перемещение или на атаку тарвоядного
+    public Predator(int x, int y) {
+        super(x, y);
+    }
 
-    public Predator(Coordinates coordinates) {
-        super(coordinates);
+    @Override
+    public String toString() {
+        return "\uD83D\uDC3A"; // Хищник - 🐺
+    }
+
+    @Override
+    public void makeMove(SimulationMap map) {
+        // Логика перемещения хищника
+        System.out.println("Predator moving");
     }
 }

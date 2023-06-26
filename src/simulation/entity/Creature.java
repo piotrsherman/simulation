@@ -1,20 +1,28 @@
 package simulation.entity;
 
-import simulation.Coordinates;
-import simulation.Map;
+import simulation.SimulationMap;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+public abstract class Creature extends Entity {
+    private int x;
+    private int y;
 
-public class Creature extends Entity {
-    // живое существо - имеет скорость (сколько клеток может пройти за 1 хода) и колличество HP
-    // makeMove() - абстрактный метод сделать ход, наследники реализуют его каждый по своему
-    public Creature(Coordinates coordinates) {
-        super(coordinates);
+    public Creature(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
-    public void makeMove(){
-
+    public int getX() {
+        return x;
     }
+
+    public int getY() {
+        return y;
+    }
+
+    public void moveTo(int newX, int newY) {
+        this.x = newX;
+        this.y = newY;
+    }
+
+    public abstract void makeMove(SimulationMap map);
 }
