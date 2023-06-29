@@ -26,16 +26,18 @@ public class Simulation {
         turnActions.add(action);
     }
 
-    public void nextTurn() {
+    public void nextTurn() throws InterruptedException {
         System.out.println("Turn: " + turnCounter);
         for (Action action : turnActions) {
             action.perform(map);
         }
         map.render();
+        Thread.sleep(3000); // задержка на 3 секунды
         turnCounter++;
     }
 
-    public void startSimulation() {
+
+    public void startSimulation() throws InterruptedException {
         System.out.println("Simulation started.");
         for (Action action : initActions) {
             action.perform(map);
