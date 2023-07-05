@@ -56,19 +56,17 @@ public class SimulationMap {
         Herbivore herbivore1 = new Herbivore(2, 3);
         placeEntity(herbivore1.getX(), herbivore1.getY(), herbivore1);
 
-        Herbivore herbivore2 = new Herbivore(5, 5);
-        placeEntity(herbivore2.getX(), herbivore2.getY(), herbivore2);
-
         Predator predator1 = new Predator(8, 2);
         placeEntity(predator1.getX(), predator1.getY(), predator1);
 
-        Predator predator2 = new Predator(9, 9);
-        placeEntity(predator2.getX(), predator2.getY(), predator2);
+        Rock rock1 = new Rock(9, 5);
+        placeEntity(rock1.getX(), rock1.getY(), rock1);
 
+        Tree tree1 = new Tree(3, 5);
+        placeEntity(tree1.getX(), tree1.getY(), tree1);
 
-        placeEntity(1, 1, new Rock());
-        placeEntity(4, 4, new Tree());
-        placeEntity(8, 3, new Grass());
+        Grass grass1 = new Grass(5, 5);
+        placeEntity(grass1.getX(), grass1.getY(), grass1);
     }
 
 
