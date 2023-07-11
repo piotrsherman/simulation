@@ -2,6 +2,7 @@ package simulation;
 
 import simulation.entity.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,7 +27,7 @@ public class SimulationMap {
     }
 
     public Collection<Entity> getEntities() {
-        return entities.values();
+        return new ArrayList<>(entities.values());
     }
 
     public void removeEntity(int x, int y) {
@@ -69,8 +70,19 @@ public class SimulationMap {
         placeEntity(grass1.getX(), grass1.getY(), grass1);
     }
 
+    public void updateEntities(Map<Coordinates, Entity> newEntities) {
+        entities.clear();
+        entities.putAll(newEntities);
+    }
+
+
+
 
     public void moveCreature(Creature creature, int newX, int newY) {
+
+        int oldX = creature.getX();
+        int oldY = creature.getY();
+
         if (isWithinBounds(newX, newY)) {
             if (getObject(newX, newY) == null) {
                 placeEntity(newX, newY, creature);
@@ -89,4 +101,12 @@ public class SimulationMap {
             }
         }
     }
+
+    public void updateEntityLocation(Entity entity, int oldX, int oldY){
+        entities.remove(new Coordinates(oldX, oldY));
+        int newX = ((Creature) entity).getX();
+        int newY = ((Creature) entity).getY();
+        entities.put(new Coordinates(newX, newY), entity);
+    }
+
 }

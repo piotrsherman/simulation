@@ -14,7 +14,29 @@ public class Herbivore extends Creature {
 
     @Override
     public void makeMove(SimulationMap map) {
+
+        int oldX = this.getX();
+        int oldY = this.getY();
+
         // Логика перемещения травоядного
+        int newX = oldX + 1;
+        int newY = oldY;
+
+        // Проверить, находится ли новая позиция в пределах карты
+        if (map.isWithinBounds(newX, newY)) {
+            // Проверить, свободна ли новая позиция
+            if (map.getObject(newX, newY) == null)  {
+                // Перемещение в новую позицию
+                map.moveCreature(this, newX, newY);
+            }
+        }
+        else
+        {
+            // Перенаправление Herbivore или игнорирование этого хода
+            // ...
+        }
+        map.updateEntityLocation(this, oldX, oldY);
         System.out.println("Herbivore moving");
     }
+
 }
