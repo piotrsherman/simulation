@@ -54,7 +54,10 @@ public class SimulationMap {
 
     public void populateEntities() {
 
-        Herbivore herbivore1 = new Herbivore(2, 3);
+        //Herbivore herbivore1 = new Herbivore(2, 3);
+        //placeEntity(herbivore1.getX(), herbivore1.getY(), herbivore1);
+
+        Herbivore herbivore1 = new Herbivore(2, 3, this);
         placeEntity(herbivore1.getX(), herbivore1.getY(), herbivore1);
 
         Predator predator1 = new Predator(8, 2);
@@ -66,7 +69,7 @@ public class SimulationMap {
         Tree tree1 = new Tree(3, 5);
         placeEntity(tree1.getX(), tree1.getY(), tree1);
 
-        Grass grass1 = new Grass(5, 5);
+        Grass grass1 = new Grass(9, 9);
         placeEntity(grass1.getX(), grass1.getY(), grass1);
     }
 
@@ -86,7 +89,7 @@ public class SimulationMap {
         if (isWithinBounds(newX, newY)) {
             if (getObject(newX, newY) == null) {
                 placeEntity(newX, newY, creature);
-                removeEntity(creature.getX(), creature.getY());
+                removeEntity(oldX, oldY);  // старые значения x и y, потому что у объекта уже обновлены координаты
                 creature.moveTo(newX, newY);
             } else {
                 // Взаимодействие между существами
