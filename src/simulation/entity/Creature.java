@@ -15,4 +15,7 @@ public abstract class Creature extends Entity {
     }
 
     public abstract void makeMove(SimulationMap map);
+
+    public abstract boolean isTarget(Entity entity);
+
 }

@@ -13,6 +13,11 @@ public class Predator extends Creature {
     }
 
     @Override
+    public boolean isTarget(Entity entity) {
+        return entity instanceof Herbivore;
+    }
+
+    @Override
     public void makeMove(SimulationMap map) {
         // Логика перемещения хищника
         System.out.println("Predator moving");

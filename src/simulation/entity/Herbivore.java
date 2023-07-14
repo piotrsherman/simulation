@@ -1,13 +1,24 @@
 package simulation.entity;
 
+import simulation.Coordinates;
+import simulation.PathFinder;
 import simulation.SimulationMap;
+
+import java.util.LinkedList;
 
 public class Herbivore extends Creature {
 
     private SimulationMap map;
+    private LinkedList<Coordinates> path;
+    private PathFinder pathFinder = new PathFinder();
     public Herbivore(int x, int y, SimulationMap map) {
         super(x, y);
         this.map = map;
+    }
+
+    @Override
+    public boolean isTarget(Entity entity) {
+        return entity instanceof Grass;
     }
 
     @Override
@@ -15,62 +26,35 @@ public class Herbivore extends Creature {
         return "\uD83D\uDC16"; // Травоядное - 🐖
     }
 
-    public void findClosestGrass() {
-        Entity closestGrass = null;
-        double closestDistance = Double.MAX_VALUE;
-
-        for (Entity entity : map.getEntities()) {
-            if (entity instanceof Grass) {
-                double distance = getDistance(this, entity);
-                if (distance < closestDistance) {
-                    closestGrass = entity;
-                    closestDistance = distance;
-                }
-            }
-        }
-
-        if (closestGrass != null) {
-            System.out.println("Ближайший объект Grass находится по координатам: (" + closestGrass.getX() + ", " + closestGrass.getY() + ")");
-        } else {
-            System.out.println("Нет объектов Grass на карте.");
-        }
-    }
-
-    // Метод вычисления расстояния между двумя сущностями
-    private double getDistance(Entity e1, Entity e2) {
-        int dx = e1.getX() - e2.getX();
-        int dy = e1.getY() - e2.getY();
-        return Math.sqrt(dx * dx + dy * dy);
-    }
 
     @Override
     public void makeMove(SimulationMap map) {
-
 
         int oldX = this.getX();
         int oldY = this.getY();
 
         // Логика перемещения травоядного
-        int newX = oldX + 1;
-        int newY = oldY;
-
-        findClosestGrass();
-
-        // Проверить, находится ли новая позиция в пределах карты
-        if (map.isWithinBounds(newX, newY)) {
-            // Проверить, свободна ли новая позиция
-            if (map.getObject(newX, newY) == null)  {
-                // Перемещение в новую позицию
-                map.moveCreature(this, newX, newY);
-            }
+        if (this.path == null || this.path.isEmpty()) {
+            // Если не задан путь или путь уже завершен, найдите новый путь до ближайшего травяного.
+            this.path = new LinkedList<>(pathFinder.findPath(new Coordinates(oldX, oldY), this, map));
         }
-        else
-        {
-            // Перенаправление Herbivore или игнорирование этого хода
-            // ...
+
+        // Продолжаем следовать по пути, если это возможно.
+        if (!this.path.isEmpty()) {
+            Coordinates nextStep = this.path.removeFirst();
+
+            // Проверить, находится ли новая позиция в пределах карты
+            if (map.isWithinBounds(nextStep.getX(), nextStep.getY())) {
+                // Проверить, свободна ли новая позиция
+                if (map.getObject(nextStep.getX(), nextStep.getY()) == null)  {
+                    // Перемещение в новую позицию
+                    map.moveCreature(this, nextStep.getX(), nextStep.getY());
+                }
+            }
         }
         map.updateEntityLocation(this, oldX, oldY);
         System.out.println("Herbivore moving");
     }
+
 
 }

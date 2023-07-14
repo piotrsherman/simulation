@@ -18,6 +18,15 @@ public class SimulationMap {
         this.entities = new HashMap<>();
     }
 
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
     public void placeEntity(int x, int y, Entity entity) {
         entities.put(new Coordinates(x, y), entity);
     }
@@ -71,6 +80,9 @@ public class SimulationMap {
 
         Grass grass1 = new Grass(9, 9);
         placeEntity(grass1.getX(), grass1.getY(), grass1);
+
+        Grass grass2 = new Grass(5, 5);
+        placeEntity(grass2.getX(), grass2.getY(), grass2);
     }
 
     public void updateEntities(Map<Coordinates, Entity> newEntities) {
