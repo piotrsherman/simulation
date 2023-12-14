@@ -18,7 +18,7 @@ public abstract class Entity {
         return y;
     }
     @Override
-    public String toString() {
-        return ""; // Переопределить этот метод в каждом подклассе сущности
+    public String toString() {// Переопределить этот метод в каждом подклассе сущности
+        return "";
     }
 }

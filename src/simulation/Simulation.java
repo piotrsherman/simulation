@@ -32,7 +32,7 @@ public class Simulation {
             action.perform(map);
         }
         map.render();
-        Thread.sleep(3000); // задержка на 3 секунды
+        Thread.sleep(2000); // задержка на 3 секунды
         turnCounter++;
     }
 
