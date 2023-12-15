@@ -25,19 +25,18 @@ public class Herbivore extends Creature {
         int oldY = this.getY();
         if (this.path == null || this.path.isEmpty()) {
             this.path = new LinkedList<>(pathFinder.findPath(new Coordinates(oldX, oldY), this, map));
-            this.path.removeFirstOccurrence(new Coordinates(oldX, oldY)); // Исключаем текущие координаты из пути
+            this.path.removeFirstOccurrence(new Coordinates(oldX, oldY));
         }
         if (!this.path.isEmpty()) {
-            Coordinates nextStep = this.path.peekFirst();  // Получаем следующий шаг, не удаляя его из пути
+            Coordinates nextStep = this.path.peekFirst();
             if (map.isWithinBounds(nextStep.getX(), nextStep.getY())) {
                 Entity entityAtNextStep = map.getObject(nextStep.getX(), nextStep.getY());
                 if (entityAtNextStep instanceof Grass) {
-                    System.out.println("eating");
-                    eat(nextStep);  // Съесть траву и переместиться на её место
-                    this.path.clear();  // Путь должен быть перестроен на следующем ходу
+                    System.out.println("Herbivore ate a Grass");
+                    eat(nextStep);
+                    this.path.clear();
                 } else if (entityAtNextStep == null) {
-                    System.out.println("Moving to next positoin");
-                    this.path.removeFirst();  // Перемещаемся, если следующая клетка свободна
+                    this.path.removeFirst();
                     map.moveCreature(this, nextStep.getX(), nextStep.getY());
                 }
             }
@@ -46,14 +45,10 @@ public class Herbivore extends Creature {
         System.out.println("Herbivore moving");
     }
     public void eat(Coordinates grassPosition) {
-        // Проверяем, что на данной позиции действительно есть трава
         Entity entity = map.getObject(grassPosition.getX(), grassPosition.getY());
         if (entity instanceof Grass) {
-            // Убираем траву (Grass) с карты
             map.removeEntity(grassPosition.getX(), grassPosition.getY());
-            // Перемещаем Herbivore на позицию, где была трава
             this.moveTo(grassPosition.getX(), grassPosition.getY());
-            // Здесь можно добавить логику увеличения здоровья или очков Herbivore, если нужно
         }
     }
 }

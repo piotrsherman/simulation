@@ -1,9 +1,6 @@
 package simulation;
 import simulation.entity.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 public class SimulationMap {
     private int width;
     private int height;
@@ -48,31 +45,37 @@ public class SimulationMap {
         }
     }
     public void populateEntities() {
-        Herbivore herbivore1 = new Herbivore(0, 0, this);
-        placeEntity(herbivore1.getX(), herbivore1.getY(), herbivore1);
-
-        Predator predator1 = new Predator(8, 2);
-        placeEntity(predator1.getX(), predator1.getY(), predator1);
-
-        Rock rock1 = new Rock(2, 4);
-        placeEntity(rock1.getX(), rock1.getY(), rock1);
-
-        Rock rock2 = new Rock(3, 4);
-        placeEntity(rock2.getX(), rock2.getY(), rock2);
-
-        Rock rock3 = new Rock(5, 4);
-        placeEntity(rock3.getX(), rock3.getY(), rock3);
-
-        Tree tree1 = new Tree(3, 5);
-        placeEntity(tree1.getX(), tree1.getY(), tree1);
-
-        Grass grass1 = new Grass(9, 9);
-        placeEntity(grass1.getX(), grass1.getY(), grass1);
-
-        Grass grass2 = new Grass(5, 5);
-        placeEntity(grass2.getX(), grass2.getY(), grass2);
+        Random rand = new Random();
+        placeEntityAtRandomLocation(new Herbivore(rand.nextInt(width), rand.nextInt(height), this));
+        placeEntityAtRandomLocation(new Herbivore(rand.nextInt(width), rand.nextInt(height), this));
+        placeEntityAtRandomLocation(new Herbivore(rand.nextInt(width), rand.nextInt(height), this));
+        placeEntityAtRandomLocation(new Predator(rand.nextInt(width), rand.nextInt(height), this));
+        placeEntityAtRandomLocation(new Predator(rand.nextInt(width), rand.nextInt(height), this));
+        placeEntityAtRandomLocation(new Grass(rand.nextInt(width), rand.nextInt(height)));
+        placeEntityAtRandomLocation(new Grass(rand.nextInt(width), rand.nextInt(height)));
+        placeEntityAtRandomLocation(new Grass(rand.nextInt(width), rand.nextInt(height)));
+        placeEntityAtRandomLocation(new Grass(rand.nextInt(width), rand.nextInt(height)));
+        placeEntityAtRandomLocation(new Grass(rand.nextInt(width), rand.nextInt(height)));
+        placeEntityAtRandomLocation(new Grass(rand.nextInt(width), rand.nextInt(height)));
+        placeEntityAtRandomLocation(new Grass(rand.nextInt(width), rand.nextInt(height)));
+        placeEntityAtRandomLocation(new Tree(rand.nextInt(width), rand.nextInt(height)));
+        placeEntityAtRandomLocation(new Tree(rand.nextInt(width), rand.nextInt(height)));
+        placeEntityAtRandomLocation(new Tree(rand.nextInt(width), rand.nextInt(height)));
+        placeEntityAtRandomLocation(new Rock(rand.nextInt(width), rand.nextInt(height)));
+        placeEntityAtRandomLocation(new Rock(rand.nextInt(width), rand.nextInt(height)));
+        placeEntityAtRandomLocation(new Rock(rand.nextInt(width), rand.nextInt(height)));
+        placeEntityAtRandomLocation(new Rock(rand.nextInt(width), rand.nextInt(height)));
+        placeEntityAtRandomLocation(new Rock(rand.nextInt(width), rand.nextInt(height)));
     }
-
+    private void placeEntityAtRandomLocation(Entity entity){
+        Random rand = new Random();
+        int x,y;
+        do{
+            x = rand.nextInt(width);
+            y = rand.nextInt(height);
+        }while(getObject(x, y) != null);
+        placeEntity(x, y, entity);
+    }
     public void updateEntities(Map<Coordinates, Entity> newEntities) {
         entities.clear();
         entities.putAll(newEntities);
@@ -80,7 +83,6 @@ public class SimulationMap {
     public void moveCreature(Creature creature, int newX, int newY) {
         int oldX = creature.getX();
         int oldY = creature.getY();
-
         if (isWithinBounds(newX, newY)) {
             if (getObject(newX, newY) == null) {
                 placeEntity(newX, newY, creature);
