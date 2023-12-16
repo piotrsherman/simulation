@@ -1,3 +1,15 @@
-[ТЗ проекта](https://zhukovsd.github.io/java-backend-learning-course/Projects/Simulation/)
+## Симуляция
+
+**[ТЗ проекта](https://zhukovsd.github.io/java-backend-learning-course/Projects/Simulation/)**
 
 ![карта симуляции](img/map.PNG)
+
+
+На карте размещены:
+- Травоядные
+- Хищники
+- Трава
+- Деревья
+- Камни
+
+Травоядные ищут траву, сближаясь - съедают. Хищники также ищут и съедают травоядных.
